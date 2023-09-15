@@ -25,7 +25,7 @@ export default {
           {
             hid: "og:image",
             property: "og:image",
-            content: this.item.species,
+            content: this.item.image,
           },
           {
             hid: "og:url",
