@@ -1,52 +1,59 @@
 <template>
-  <div>
-    Teste {{ item }}
-  </div>
+  <div>Teste {{ item }}</div>
 </template>
 
 <script>
-
 export default {
-  name: 'id',
-
+  name: "id",
   head() {
-    return {
-      title: this.item.titulo_publicitario,
-      meta: [
-        { hid: 'title', name:'title', content: this.item.titulo_publicitario},
-        { hid: 'description', name:'description', content: this.item.texto_publicitario},
-        { hid: 'og:title', property: 'og:title', content: this.item.titulo_publicitario},
-        { hid: 'og:type', property: 'og:type', content: 'website'},
-        { hid: 'og:image', property: 'og:image', content: this.item.first_photo },
-        { hid: 'og:url', property: 'og:url', content: this.item.link },
-        { hid: 'og:locale', property: 'og:locale', content: 'pt_BR' },
-      ],
-    }
+    if (!this.item.name) return null
+      return {
+        title: this.item.name,
+        meta: [
+          { hid: "title", name: "title", content: this.item.name },
+          {
+            hid: "description",
+            name: "description",
+            content: this.item.name,
+          },
+          {
+            hid: "og:title",
+            property: "og:title",
+            content: this.item.status,
+          },
+          { hid: "og:type", property: "og:type", content: "website" },
+          {
+            hid: "og:image",
+            property: "og:image",
+            content: this.item.species,
+          },
+          {
+            hid: "og:url",
+            property: "og:url",
+            content: this.item.location.url,
+          },
+          { hid: "og:locale", property: "og:locale", content: "pt_BR" },
+        ],
+      };
   },
 
-  data () {
+  data() {
     return {
-      item: {}
-    }
+      item: {},
+    };
   },
 
   async fetch() {
-    if(this.$route.params.id && this.$route.params.id != ''){
-
-      await this.$store.dispatch('properties/getProperty', this.$route.params.id)
-                        .then(response => {
-                          this.item = response
-                        })
-                        .catch(error => {
-                        })
-
+    if (this.$route.params.id && this.$route.params.id != "") {
+      await this.$store
+        .dispatch("properties/getProperty", this.$route.params.id)
+        .then((response) => {
+          this.item = response;
+        })
+        .catch((error) => {});
     }
   },
 
-
-  methods: {
-
-  }
-
-}
+  methods: {},
+};
 </script>

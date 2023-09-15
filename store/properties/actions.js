@@ -15,13 +15,13 @@ export default {
         .finally(() => '')
   },
 
-  getProperty(context, id){
+  async getProperty(context, id){
 
     this.$axios.setHeader('X-key', X_KEY)
-    var url = `${RESOURCE}/` + id
-
-    return this.$axios.$get(url)
-        .then( response => response.data)
+    // var url = `${RESOURCE}/` + id
+    var url = "https://rickandmortyapi.com/api/character/"+id
+    return await this.$axios.$get(url)
+        .then( response => response)
         .catch( errors => reject(errors))
         .finally(() => '')
   },
